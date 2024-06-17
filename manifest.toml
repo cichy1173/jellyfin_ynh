@@ -83,13 +83,13 @@ ram.runtime = "100M"
 
     [resources.sources.ffmpeg_bookworm]
     armhf.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/armhf/jellyfin-ffmpeg5_5.1.4-3-bookworm_armhf.deb"
-    armhf.md5 = "683a71e255f2171e3a3971a18b1486e6"
+    armhf.sha256 = "bdb28e67fa4dc8e321366c4a19e18bcc6166a60d6aa5a4bf2da1263489b4f25f"
 
     arm64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/arm64/jellyfin-ffmpeg5_5.1.4-3-bookworm_arm64.deb"
-    arm64.md5 = "e70488f4dcba16dc39ecee4d60d5580d"
+    arm64.sha256 = "aabf62104399f242ddb7b8c2e308976f6b233ceac5ffccbabd340a28e428ca3c"
 
     amd64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/amd64/jellyfin-ffmpeg5_5.1.4-3-bookworm_amd64.deb"
-    amd64.md5 = "b18c000f1ce9e278c73286c9cf72d039"
+    amd64.sha256 = "cb40c04e026d83b9265535e214f883d4a26824b5703304064fd38fffa70ac449"
 
     rename = "jellyfin-ffmpeg6.deb"
     format = "whatever"
@@ -98,13 +98,13 @@ ram.runtime = "100M"
 
     [resources.sources.ffmpeg_bullseye]
     armhf.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/armhf/jellyfin-ffmpeg5_5.1.4-3-bullseye_armhf.deb"
-    armhf.md5 = "09e46ff21a1a62b1b7b133e65e176ae6"
+    armhf.sha256 = "700bab9e8c96594f83d731019cdbc20fbab303c1d8440288e463e372cd16ed7a"
 
     arm64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/arm64/jellyfin-ffmpeg5_5.1.4-3-bullseye_arm64.deb"
-    arm64.md5 = "69d5b3403cd2419a3930d842ef4aa6e6"
+    arm64.sha256 = "56ef93f285e922417cda98b109021be614a5307d9d7c18aff22fa0c439ab77b5"
 
     amd64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/amd64/jellyfin-ffmpeg5_5.1.4-3-bullseye_amd64.deb"
-    amd64.md5 = "c98de232b7c8dc0a331ea1291f5d5cfd"
+    amd64.sha256 = "50b0cbd2cd0ab64fd6803d2bdfd15946ec6f80c0b492f81ad85e921ffafdcf7e"
 
     rename = "jellyfin-ffmpeg6.deb"
     format = "whatever"
@@ -113,13 +113,13 @@ ram.runtime = "100M"
 
     [resources.sources.ffmpeg_buster]
     armhf.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/armhf/jellyfin-ffmpeg5_5.1.4-3-buster_armhf.deb"
-    armhf.md5 = "7f772a8d4fedb5425c40138970e7eec3"
+    armhf.sha256 = "6f3beae72aec030aae96dc044bfcf736f12fc135cc574cde8085609e47374a43"
 
     arm64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/arm64/jellyfin-ffmpeg5_5.1.4-3-buster_arm64.deb"
-    arm64.md5 = "f0cf7a203c69bf392e865d1621ac8cfb"
+    arm64.sha256 = "109ea41f17e314e3e9b32689844841ddd54a600419ff89e0e979e195a25b91c5"
 
     amd64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/amd64/jellyfin-ffmpeg5_5.1.4-3-buster_amd64.deb"
-    amd64.md5 = "63950af02403fe55429055c8a1c8bafc"
+        amd64.sha256 = "a1c55b7f439f2b9a487ea90341a280467f1973fcd12607f08bcd16cf22ce307a"
     
     rename = "jellyfin-ffmpeg6.deb"
     format = "whatever"
