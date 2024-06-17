@@ -91,7 +91,7 @@ ram.runtime = "100M"
     amd64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/amd64/jellyfin-ffmpeg5_5.1.4-3-bookworm_amd64.deb"
     amd64.sha256 = "0e00e666b0d179344962bb6e237bc2882fe1902488260b826f4444d84a04451d"
 
-    rename = "jellyfin-ffmpeg6.deb"
+    rename = "jellyfin-ffmpeg5.deb"
     format = "whatever"
     extract = false
 
@@ -106,7 +106,7 @@ ram.runtime = "100M"
     amd64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/amd64/jellyfin-ffmpeg5_5.1.4-3-bullseye_amd64.deb"
     amd64.sha256 = "0c36061b360dc859cf10fa8f91c28eba7b47932e6360ee67a63dc54fa0ffacef"
 
-    rename = "jellyfin-ffmpeg6.deb"
+    rename = "jellyfin-ffmpeg5.deb"
     format = "whatever"
     extract = false
 
@@ -121,7 +121,7 @@ ram.runtime = "100M"
     amd64.url = "https://repo.jellyfin.org/files/ffmpeg/debian/latest-5.x/amd64/jellyfin-ffmpeg5_5.1.4-3-buster_amd64.deb"
     amd64.sha256 = "ee6810ec2134fc8cb0dd120c8aa46d35df3ce7ed4b5c58c79f88d71a331a866e"
     
-    rename = "jellyfin-ffmpeg6.deb"
+    rename = "jellyfin-ffmpeg5.deb"
     format = "whatever"
     extract = false
 

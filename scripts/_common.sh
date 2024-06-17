@@ -44,18 +44,18 @@ install_jellyfin_packages() {
 		ynh_package_remove "jellyfin-ffmpeg5"
 	fi
 	ynh_package_install \
-		"$tempdir/jellyfin-ffmpeg6.deb"
+		"$tempdir/jellyfin-ffmpeg5.deb"
 
 	# The doc says it should be called only once,
 	# but the code says multiple calls are supported.
 	# Also, they're already installed so that should be quasi instantaneous.
 	ynh_install_app_dependencies \
 		jellyfin-web="$pkg_version" \
-		jellyfin-ffmpeg6="$ffmpeg_pkg_version-$debian" \
+		jellyfin-ffmpeg5="$ffmpeg_pkg_version-$debian" \
 		jellyfin-server="$pkg_version"
 
 	# Mark packages as dependencies, to allow automatic removal
-	apt-mark auto jellyfin-server jellyfin-web jellyfin-ffmpeg6
+	apt-mark auto jellyfin-server jellyfin-web jellyfin-ffmpeg5
 }
 
 open_jellyfin_discovery_ports() {
