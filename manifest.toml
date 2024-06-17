@@ -73,7 +73,7 @@ ram.runtime = "100M"
     extract = false
 
     [resources.sources.web]
-    url = "https://repo.jellyfin.org/files/server/debian/stable/10.8.13/jellyfin-web_10.8.13-1_all.deb"
+    url = "https://repo.jellyfin.org/files/releases/server/debian/versions/stable/web/10.8.13/jellyfin-web_10.8.13-1_all.deb"
     sha256 = "8a30e2239f97d1d749f6059db0ff1e4189f44babfb9b0cf236102b7c95b0babe"
 
     rename = "jellyfin-web.deb"
