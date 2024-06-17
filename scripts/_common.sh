@@ -25,26 +25,80 @@ cache_path="/var/cache/$app"
 # PERSONAL HELPERS
 #=================================================
 
+ffmpeg_deps=(
+	libass9
+	libbluray2
+	libc6
+	libdrm2
+	libfontconfig1
+	libfreetype6
+	libfribidi0
+	libgcc1
+	libgmp10
+	libgnutls30
+	libllvm13
+	libmp3lame0
+	libopus0
+	libstdc++6
+	libtheora0
+	libvdpau1
+	libvorbis0a
+	libvorbisenc2
+	libwebp6
+	libwebpmux3
+	libx11-6
+	libxcb-randr0
+	libzvbi0
+	zlib1g
+)
+
+case "$debian" in
+	buster) ffmpeg_deps+=( libvpx5 libx264-155 libx265-165 ) ;;
+	bullseye) ffmpeg_deps+=( libvpx6 libx264-160 libx265-192 ) ;;
+	*) echo "Unknown release: $debian" >&2; exit 1 ;;
+esac
+case "$YNH_ARCH" in
+	arm64) : ;;
+	armhf) : ;;
+	*) ffmpeg_deps+=( libdrm-intel1 libopencl1 ) ;;
+esac
+
+jellyfin_deps=(at libsqlite3-0 libfontconfig1 libfreetype6 libssl1.1)
+
+pkg_dependencies="${ffmpeg_deps[*]} ${jellyfin_deps[*]}"
+
+#=================================================
+# PERSONAL HELPERS
+#=================================================
+
 install_jellyfin_packages() {
+	# In case of a new version, the url change from
+	# https://repo.jellyfin.org/releases/server/debian/versions/stable/server/X.X.X/jellyfin-server_X.X.X-1_$YNH_ARCH.deb to
+	# https://repo.jellyfin.org/archive/debian/stable/X.X.X/server/jellyfin-server_X.X.X-1_$YNH_ARCH.deb
+	for pkg in web server; do
+		src_url=$(grep 'SOURCE_URL=' "$YNH_APP_BASEDIR/conf/$pkg.$debian.$YNH_ARCH.src" | cut -d= -f2-)
+		if ! curl --output /dev/null --silent --head --fail "$src_url"; then
+			ynh_replace_string \
+				--match_string="releases/server/debian/versions/stable/$pkg/$version/" \
+				--replace_string="archive/debian/stable/$version/$pkg/" \
+				--target_file="$YNH_APP_BASEDIR/conf/$pkg.$debian.$YNH_ARCH.src"
+		fi
+	done
+
 	# Create the temporary directory
 	tempdir="$(mktemp -d)"
 
 	# Download the deb files
-	ynh_setup_source --dest_dir="$tempdir" --source_id="web"
-	ynh_setup_source --dest_dir="$tempdir" --source_id="ffmpeg_$debian"
-	ynh_setup_source --dest_dir="$tempdir" --source_id="server"
+	ynh_setup_source --dest_dir=$tempdir --source_id="ffmpeg.$debian.$YNH_ARCH"
+	ynh_setup_source --dest_dir=$tempdir --source_id="server.$debian.$YNH_ARCH"
+	ynh_setup_source --dest_dir=$tempdir --source_id="web.$debian.$YNH_ARCH"
 
 	# Install the packages
-	ynh_package_install \
-		"$tempdir/jellyfin-web.deb" \
-		"$tempdir/jellyfin-server.deb"
+	ynh_exec_warn_less dpkg --force-confdef --force-confnew -i $tempdir/jellyfin-web.deb
+	ynh_exec_warn_less dpkg --force-confdef --force-confnew -i $tempdir/jellyfin-ffmpeg5.deb
+	ynh_exec_warn_less dpkg --force-confdef --force-confnew -i $tempdir/jellyfin-server.deb
 
-	# We need to workaround yunohoost passing --no-remove to replace jellyfin-ffmpeg5...
-	if ynh_package_is_installed "jellyfin-ffmpeg5"; then
-		ynh_package_remove "jellyfin-ffmpeg5"
-	fi
-	ynh_package_install \
-		"$tempdir/jellyfin-ffmpeg5.deb"
+	ynh_secure_remove --file="$tempdir"
 
 	# The doc says it should be called only once,
 	# but the code says multiple calls are supported.
@@ -53,9 +107,6 @@ install_jellyfin_packages() {
 		jellyfin-web="$pkg_version" \
 		jellyfin-ffmpeg5="$ffmpeg_pkg_version-$debian" \
 		jellyfin-server="$pkg_version"
-
-	# Mark packages as dependencies, to allow automatic removal
-	apt-mark auto jellyfin-server jellyfin-web jellyfin-ffmpeg5
 }
 
 open_jellyfin_discovery_ports() {
